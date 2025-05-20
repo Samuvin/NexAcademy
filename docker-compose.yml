@@ -10,7 +10,13 @@ services:
       - "55432:5432"
 
   app:
-    build: .
+    build:
+      context: .
+      args:
+        DATABASE_URL: postgresql://doadmin:AVNS_0m0NabkZc2oCr2yWqZV@nexacademy-do-user-16631038-0.k.db.ondigitalocean.com:25060/defaultdb?sslmode=require
+        NODE_ENV: production
+        PRISMA_MIGRATE_SKIP_GENERATE: "true"
+        PRISMA_MIGRATE_SKIP_SHADOW_DATABASE: "true"
     depends_on:
       - db
     environment:
@@ -27,4 +33,4 @@ services:
       sh -c "npx prisma migrate deploy && npm run build && npm start"
 
 volumes:
-  postgres_data: 
+  postgres_data:

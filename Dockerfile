@@ -1,6 +1,11 @@
 # 1. Build stage
 FROM node:20 AS builder
 
+
+# Accept build args
+ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
+
 WORKDIR /app
 
 COPY package*.json ./
